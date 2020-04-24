@@ -7,7 +7,7 @@
 #include <cstddef>
 #include <limits>
 using namespace std;
-#include <cmath>
+#include <math.h>
 template<class T>
 class Matrix{
     static_assert(std::is_arithmetic<T>::value,"Not arithmetic type");
@@ -110,10 +110,10 @@ public:
                     proiz[i][j] += m[i][k] * F.m[k][j];
                 }
             }
-        for (int i=0;i<rows;i++){
+         for (int i=0;i<rows;i++){
             for (int j=0;j<F.columns;j++){
                 if (abs(proiz[i][j])<10*std::numeric_limits<double>::epsilon()) proiz[i][j]=0;
-                if (abs(abs(proiz[i][j])-1)<10*std::numeric_limits<double>::epsilon()) proiz[i][j]=1;
+                if (abs(abs(proiz[i][j])-round(proiz[i][j]))<10*std::numeric_limits<double>::epsilon()) proiz[i][j]=round(proiz[i][j]);
             }
         }
         return proiz;
